@@ -1,5 +1,3 @@
-# pismocode
-
 Transaction Service
 A RESTful transaction service written in Go, designed to manage accounts and transactions with maintainability, simplicity, and testability in mind. This service provides basic endpoints to create and retrieve accounts, and log transactions.
 
@@ -10,46 +8,40 @@ Log Transactions: Record transactions linked to an account with various operatio
 Dockerized Deployment: Ready-to-use Docker configuration for streamlined deployment.
 Unit Testing: Basic tests included for core functionality.
 Repository
-Access the source code at: https://github.com/ssh-shashi/pismocode
+Access the source code at: Transaction Service Repository
 
 Prerequisites
-Go 1.19+: Install from Go Downloads.
-Docker: For containerized deployment (optional).
-Git: To clone the repository.
+Go 1.19+
+Docker (optional for containerized deployment)
+Git to clone the repository
 Setup Instructions
-1. Clone the Repository
-sh
-Copy code
+Clone the Repository
+
 git clone https://github.com/ssh-shashi/pismocode.git
 cd pismocode
-2. Run Locally (Without Docker)
+Run Locally (Without Docker)
 Initialize the Go module and download dependencies:
 
-sh
-Copy code
+
 go mod tidy
 Run the application:
 
-sh
-Copy code
+
 go run *.go
 The service will start at http://localhost:8080.
 
-3. Run with Docker
+Run with Docker
 Build the Docker image:
 
-sh
-Copy code
+
 docker build -t transaction-service .
 Run the container:
 
-sh
-Copy code
-docker run -p 8080:8080 transaction-service
-Alternatively, use docker-compose:
 
-sh
-Copy code
+docker run -p 8080:8080 transaction-service
+Alternatively, use Docker Compose:
+
+
 docker-compose up --build
 API Endpoints
 1. Create Account
@@ -58,15 +50,11 @@ Registers a new account with a unique document number.
 
 Request Body:
 
-json
-Copy code
 {
   "document_number": "12345678900"
 }
 Response:
 
-json
-Copy code
 {
   "account_id": 1,
   "document_number": "12345678900"
@@ -77,8 +65,6 @@ Fetches details of an account by its ID.
 
 Response:
 
-json
-Copy code
 {
   "account_id": 1,
   "document_number": "12345678900"
@@ -89,8 +75,7 @@ Logs a transaction for an account.
 
 Request Body:
 
-json
-Copy code
+
 {
   "account_id": 1,
   "operation_type_id": 4,
@@ -107,24 +92,22 @@ Copy code
   "amount": 123.45,
   "event_date": "2024-11-25T14:48:00Z"
 }
-Operation Types:
-
-1: Normal Purchase (negative amount)
-2: Purchase with Installments (negative amount)
-3: Withdrawal (negative amount)
-4: Credit Voucher (positive amount)
+Operation Types
+ID	Description	Amount Type
+1	Normal Purchase	Negative
+2	Purchase with Installments	Negative
+3	Withdrawal	Negative
+4	Credit Voucher	Positive
 Testing
 Unit tests are provided for core functionality.
 
 Run tests:
 
-sh
-Copy code
-go test ./...
-Example output:
 
-plaintext
-Copy code
+go test ./...
+Sample output:
+
+
 === RUN   TestCreateAccount
 --- PASS: TestCreateAccount (0.00s)
 === RUN   TestGetAccount
